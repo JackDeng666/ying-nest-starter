@@ -1,9 +1,13 @@
+import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Logger } from '@nestjs/common';
+import { loggerMiddleware } from './common/middleware/logger.middleware';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.use(loggerMiddleware);
+  app.useGlobalFilters(new HttpExceptionFilter());
   app.setGlobalPrefix(AppModule.serverPrefix);
   await app.listen(AppModule.serverPort);
   return {
