@@ -1,8 +1,19 @@
+import { UploadService } from './../upload/upload.service';
 import { EmailService } from './../email/email.service';
 // import { AccessGuard } from '../../common/guards/access.guard';
-import { Controller, Get, Inject, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
 import { Permissions } from 'src/common/decorators/permissions.decorator';
 import { TestService } from './test.service';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('test')
 // @UseGuards(AccessGuard)
@@ -10,6 +21,7 @@ export class TestController {
   constructor(
     private readonly testService: TestService,
     private readonly emailService: EmailService,
+    private readonly uploadService: UploadService,
   ) {}
 
   @Get()
@@ -25,5 +37,10 @@ export class TestController {
   @Post('email')
   sendEmail() {
     return this.emailService.sendEmail();
+  }
+  @Post('upload')
+  @UseInterceptors(FileInterceptor('file'))
+  async uploadFile(@UploadedFile() file) {
+    return await this.uploadService.saveFile(file);
   }
 }

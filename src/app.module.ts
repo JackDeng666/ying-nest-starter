@@ -1,5 +1,5 @@
-import { TasksModule } from './modules/tasks/tasks.module';
-import { ScheduleModule } from '@nestjs/schedule';
+// import { TasksModule } from './modules/tasks/tasks.module';
+// import { ScheduleModule } from '@nestjs/schedule';
 import { TestModule } from './modules/test/test.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -7,9 +7,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }), 
-    ScheduleModule.forRoot(), 
+    // ScheduleModule.forRoot(), 
     TestModule,
-    TasksModule
+    // TasksModule
   ],
 })
 export class AppModule {
