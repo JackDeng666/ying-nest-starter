@@ -1,9 +1,10 @@
+import { EmailModule } from './modules/email/email.module';
 import { TestModule } from './modules/test/test.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
-  imports: [ConfigModule.forRoot(), TestModule],
+  imports: [ConfigModule.forRoot({ isGlobal: true }), TestModule],
 })
 export class AppModule {
   static serverPort: number;
