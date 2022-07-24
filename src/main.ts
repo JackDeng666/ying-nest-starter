@@ -1,3 +1,4 @@
+import { ProcessTimeInterceptor } from './common/interceptors/process-time.interceptor';
 import { AccessGuard } from './common/guards/access.guard';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { NestFactory, Reflector } from '@nestjs/core';
@@ -8,6 +9,7 @@ import { loggerMiddleware } from './common/middleware/logger.middleware';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(loggerMiddleware);
+  app.useGlobalInterceptors(new ProcessTimeInterceptor());
   app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalGuards(new AccessGuard(new Reflector()));
   app.setGlobalPrefix(AppModule.serverPrefix);
