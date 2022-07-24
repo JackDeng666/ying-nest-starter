@@ -1,10 +1,16 @@
-import { EmailModule } from './modules/email/email.module';
+import { TasksModule } from './modules/tasks/tasks.module';
+import { ScheduleModule } from '@nestjs/schedule';
 import { TestModule } from './modules/test/test.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true }), TestModule],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }), 
+    ScheduleModule.forRoot(), 
+    TestModule,
+    TasksModule
+  ],
 })
 export class AppModule {
   static serverPort: number;
