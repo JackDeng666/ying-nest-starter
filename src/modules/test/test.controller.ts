@@ -11,7 +11,7 @@ import {
   UploadedFile,
   UseGuards,
   UseInterceptors,
-  Request
+  Request,
 } from '@nestjs/common';
 import { Permissions } from 'src/common/decorators/permissions.decorator';
 import { TestService } from './test.service';

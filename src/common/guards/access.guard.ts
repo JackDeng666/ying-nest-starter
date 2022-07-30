@@ -6,7 +6,10 @@ export class AccessGuard implements CanActivate {
   constructor(private readonly reflector: Reflector) {}
 
   canActivate(context: ExecutionContext): boolean {
-    const permissions = this.reflector.get<string[]>('permissions', context.getHandler());
+    const permissions = this.reflector.get<string[]>(
+      'permissions',
+      context.getHandler(),
+    );
     console.log('Permissions: ', permissions);
     if (!permissions) {
       return true;

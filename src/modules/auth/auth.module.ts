@@ -14,7 +14,7 @@ import { JwtStrategy } from './jwt.strategy';
         secret: config.get('JWT_SECRET'),
         signOptions: { expiresIn: config.get('JWT_EXPIRE') },
       }),
-      inject: [ConfigService]
+      inject: [ConfigService],
     }),
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy],
