@@ -9,7 +9,6 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('test')
-// @UseGuards(AccessGuard)
 export class TestController {
   constructor(
     private readonly emailService: EmailService,

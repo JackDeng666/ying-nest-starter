@@ -7,17 +7,21 @@ import {
   Body,
   HttpException,
   HttpStatus,
-  SetMetadata,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
+import { NoToken } from '../../common/decorators/noToken.decorator';
 
 @Controller('auth')
 export class AuthConstroller {
   constructor(private readonly authService: AuthService) {}
 
   @Post('/login')
+  @NoToken()
   async login(@Body() user: UserDto) {
-    const valUser = await this.authService.validateUser(user.username, user.password);
+    const valUser = await this.authService.validateUser(
+      user.username,
+      user.password,
+    );
     if (valUser) {
       const userData = new UserDto();
       userData.id = valUser.id;
@@ -32,7 +36,6 @@ export class AuthConstroller {
   }
 
   @Get('/userinfo')
-  @SetMetadata('token', true)
   getProfile(@Request() req) {
     console.log(req.user);
     return req.user;
