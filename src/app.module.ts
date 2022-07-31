@@ -1,3 +1,4 @@
+import { UserModule } from './modules/user/user.module';
 import { User } from './modules/user/user.model';
 // import { TasksModule } from './modules/tasks/tasks.module';
 // import { ScheduleModule } from '@nestjs/schedule';
@@ -5,6 +6,8 @@ import { TestModule } from './modules/test/test.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { APP_GUARD } from '@nestjs/core';
+import { AccessGuard } from './common/guards/access.guard';
 
 @Module({
   imports: [
@@ -26,7 +29,14 @@ import { SequelizeModule } from '@nestjs/sequelize';
     ConfigModule.forRoot({ isGlobal: true }),
     // ScheduleModule.forRoot(),
     TestModule,
-    // TasksModule
+    // TasksModule,
+    UserModule,
+  ],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: AccessGuard,
+    },
   ],
 })
 export class AppModule {

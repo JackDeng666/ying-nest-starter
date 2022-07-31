@@ -29,6 +29,7 @@
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/schedule": "^2.1.0",
     "@nestjs/sequelize": "^8.0.0",
+    "class-transformer": "^0.5.1",
     "mysql2": "^2.3.3",
     "nodemailer": "^6.7.7",
     "passport": "^0.6.0",
